@@ -4,8 +4,8 @@
 
 @interface FISSentence ()
 
-@property (strong, nonatomic, readwrite) NSMutableArray *clauses;
-@property (strong, nonatomic, readwrite) NSMutableArray *punctuations;
+@property (strong, nonatomic) NSMutableArray *clauses;
+@property (strong, nonatomic) NSMutableArray *punctuations;
 @property (strong, nonatomic, readwrite) NSString *sentence;
 
 @end
@@ -26,8 +26,9 @@
 
 - (void)assembleSentence {
     NSMutableString *sentence = [[NSMutableString alloc] initWithString:@""];
+    
     for (NSUInteger i = 0; i < self.clauses.count; i++) {
-        NSMutableArray *currentClause = self.clauses[i];
+        NSMutableArray *currentClause = [self.clauses[i] mutableCopy];
         if (i == 0) {
             NSString *firstWord = currentClause[0];
             currentClause[0] = firstWord.capitalizedString;
@@ -37,11 +38,9 @@
         if (i > 0) {
             [phrase insertString:@" " atIndex:0];
         }
-        NSLog(@"%@", phrase);
         [sentence appendString:phrase];
     }
     self.sentence = sentence;
-    NSLog(@"%@", self.sentence);
 }
 
 - (BOOL)validClause:(NSArray *)clause {
@@ -65,24 +64,24 @@
     return YES;
 }
 
-- (BOOL)validIndex:(NSUInteger)index {
-    if (index > self.clauses.count) {
+- (BOOL)validClausesIndex:(NSUInteger)clausesIndex {
+    if (clausesIndex >= self.clauses.count) {
         return NO;
     }
-    if (index > self.punctuations.count) {
+    if (clausesIndex >= self.punctuations.count) {
         return NO;
     }
     return YES;
 }
 
-- (BOOL)validClauseIndex:(NSUInteger)clauseIndex inClauseAtIndex:(NSUInteger)index {
-    BOOL validIndex = [self validIndex:index];
-    if (!validIndex) {
+- (BOOL)validWordsIndex:(NSUInteger)wordsIndex inClauseAtIndex:(NSUInteger)clausesIndex {
+    BOOL validClausesIndex = [self validClausesIndex:clausesIndex];
+    if (!validClausesIndex) {
         return NO;
     }
     
-    NSArray *clause = self.clauses[index];
-    if (clauseIndex > clause.count) {
+    NSArray *clause = self.clauses[clausesIndex];
+    if (wordsIndex >= clause.count) {
         return NO;
     }
     return YES;
@@ -106,80 +105,98 @@
     BOOL validPunctuation = [self validPunctuation:punctuation];
     
     if (validClause && validPunctuation) {
-        NSMutableArray *mutableClause = [clause mutableCopy];
-        [self.clauses addObject:mutableClause];
+        [self.clauses addObject:[clause mutableCopy]];
         [self.punctuations addObject:punctuation];
     }
+    
     [self assembleSentence];
 }
 
-- (void)removeClauseAtIndex:(NSUInteger)index {
-    BOOL validIndex = [self validIndex:index];
+- (void)removeClauseAtIndex:(NSUInteger)clausesIndex {
+    BOOL validClausesIndex = [self validClausesIndex:clausesIndex];
     
-    if (validIndex) {
-        [self.clauses removeObjectAtIndex:index];
-        [self.punctuations removeObjectAtIndex:index];
+    if (validClausesIndex) {
+        [self.clauses removeObjectAtIndex:clausesIndex];
+        [self.punctuations removeObjectAtIndex:clausesIndex];
     }
+    
     [self assembleSentence];
 }
 
 - (void)insertClause:(NSArray *)clause
      withPunctuation:(NSString *)punctuation
-             atIndex:(NSUInteger)index {
+      atClausesIndex:(NSUInteger)clausesIndex {
     BOOL validClause = [self validClause:clause];
     BOOL validPunctuation = [self validPunctuation:punctuation];
-    BOOL validIndex = [self validIndex:index];
+    BOOL validIndex = [self validClausesIndex:clausesIndex];
     
     
     if (validClause && validPunctuation && validIndex) {
-        [self.clauses insertObject:clause atIndex:index];
-        [self.punctuations insertObject:punctuation atIndex:index];
+        [self.clauses insertObject:[clause mutableCopy] atIndex:clausesIndex];
+        [self.punctuations insertObject:punctuation atIndex:clausesIndex];
     }
+    
     [self assembleSentence];
 }
 
-- (void)replacePunctuationForClauseAtIndex:(NSUInteger)index
-                             toPunctuation:(NSString *)punctuation {
-    BOOL validIndex = [self validIndex:index];
+- (void)replacePunctuationForClauseAtIndex:(NSUInteger)clausesIndex
+                           withPunctuation:(NSString *)punctuation {
+    BOOL validClausesIndex = [self validClausesIndex:clausesIndex];
     BOOL validPunctuation = [self validPunctuation:punctuation];
     
-    if (validIndex && validPunctuation) {
-        self.punctuations[index] = punctuation;
+    if (validClausesIndex && validPunctuation) {
+        self.punctuations[clausesIndex] = punctuation;
     }
+    
     [self assembleSentence];
 }
 
-- (void)addWord:(NSString *)word toClauseAtIndex:(NSUInteger)index {
+- (void)addWord:(NSString *)word toClauseAtIndex:(NSUInteger)clausesIndex {
     BOOL validWord = [self validWord:word];
-    BOOL validIndex = [self validIndex:index];
+    BOOL validClausesIndex = [self validClausesIndex:clausesIndex];
     
-    if (validWord && validIndex) {
-        [self.clauses[index] addObject:word];
+    if (validWord && validClausesIndex) {
+        [self.clauses[clausesIndex] addObject:word];
     }
+    
     [self assembleSentence];
 }
 
-- (void)removeWordFromClauseAtIndex:(NSUInteger)index
-                      atClauseIndex:(NSUInteger)clauseIndex {
-    BOOL validIndex = [self validIndex:index];
-    BOOL validClauseIndex = [self validClauseIndex:clauseIndex inClauseAtIndex:index];
+- (void)removeWordAtIndex:(NSUInteger)wordsIndex
+        fromClauseAtIndex:(NSUInteger)clausesIndex {
+    BOOL validClausesIndex = [self validClausesIndex:clausesIndex];
+    BOOL validWordsIndex = [self validWordsIndex:wordsIndex inClauseAtIndex:clausesIndex];
     
-    if (validIndex && validClauseIndex) {
-        [self.clauses[index] removeObjectAtIndex:clauseIndex];
+    if (validClausesIndex && validWordsIndex) {
+        [self.clauses[clausesIndex] removeObjectAtIndex:wordsIndex];
     }
     
     [self assembleSentence];
 }
 
 - (void)insertWord:(NSString *)word
-   inClauseAtIndex:(NSUInteger)index
-     atClauseIndex:(NSUInteger)clauseIndex {
+           atIndex:(NSUInteger)wordsIndex
+   inClauseAtIndex:(NSUInteger)clausesIndex {
     BOOL validWord = [self validWord:word];
-    BOOL validIndex = [self validIndex:index];
-    BOOL validClauseIndex = [self validClauseIndex:clauseIndex inClauseAtIndex:index];
+    BOOL validClausesIndex = [self validClausesIndex:clausesIndex];
+    BOOL validWordsIndex = [self validWordsIndex:wordsIndex inClauseAtIndex:clausesIndex];
     
-    if (validWord && validIndex && validClauseIndex) {
-        [self.clauses[index] insertObject:word atIndex:clauseIndex];
+    if (validWord && validClausesIndex && validWordsIndex) {
+        [self.clauses[clausesIndex] insertObject:word atIndex:wordsIndex];
+    }
+    
+    [self assembleSentence];
+}
+
+- (void)replaceWordAtIndex:(NSUInteger)wordsIndex
+           inClauseAtIndex:(NSUInteger)clausesIndex
+                  withWord:(NSString *)word {
+    BOOL validClausesIndex = [self validClausesIndex:clausesIndex];
+    BOOL validWordsIndex = [self validWordsIndex:wordsIndex inClauseAtIndex:clausesIndex];
+    BOOL validWord = [self validWord:word];
+    
+    if (validClausesIndex && validWordsIndex && validWord) {
+        [self.clauses[clausesIndex] replaceObjectAtIndex:wordsIndex withObject:word];
     }
     
     [self assembleSentence];

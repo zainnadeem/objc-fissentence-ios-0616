@@ -4,28 +4,30 @@
 
 @interface FISSentence : NSObject
 
-@property (strong, nonatomic, readonly) NSMutableArray *clauses;
-@property (strong, nonatomic, readonly) NSMutableArray *punctuations;
 @property (strong, nonatomic, readonly) NSString *sentence;
 
 - (void)addClause:(NSArray *)clause withPunctuation:(NSString *)punctuation;
 
-- (void)removeClauseAtIndex:(NSUInteger)index;
+- (void)removeClauseAtIndex:(NSUInteger)clausesIndex;
 
 - (void)insertClause:(NSArray *)clause
      withPunctuation:(NSString *)punctuation
-             atIndex:(NSUInteger)index;
+      atClausesIndex:(NSUInteger)clausesIndex;
 
-- (void)replacePunctuationForClauseAtIndex:(NSUInteger)index
-                             toPunctuation:(NSString *)punctuation;
+- (void)replacePunctuationForClauseAtIndex:(NSUInteger)clausesIndex
+                           withPunctuation:(NSString *)punctuation;
 
-- (void)addWord:(NSString *)word toClauseAtIndex:(NSUInteger)index;
+- (void)addWord:(NSString *)word toClauseAtIndex:(NSUInteger)clausesIndex;
 
-- (void)removeWordFromClauseAtIndex:(NSUInteger)index
-                      atClauseIndex:(NSUInteger)clauseIndex;
+- (void)removeWordAtIndex:(NSUInteger)wordsIndex
+        fromClauseAtIndex:(NSUInteger)clausesIndex;
 
 - (void)insertWord:(NSString *)word
-   inClauseAtIndex:(NSUInteger)index
-     atClauseIndex:(NSUInteger)clauseIndex;
+           atIndex:(NSUInteger)wordIndex
+   inClauseAtIndex:(NSUInteger)clauseIndex;
+
+- (void)replaceWordAtIndex:(NSUInteger)wordsIndex
+           inClauseAtIndex:(NSUInteger)clausesIndex
+                  withWord:(NSString *)word;
 
 @end
