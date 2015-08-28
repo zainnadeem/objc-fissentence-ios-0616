@@ -4,9 +4,9 @@
 
 @interface FISSentence ()
 
+@property (strong, nonatomic, readwrite) NSString *sentence;
 @property (strong, nonatomic) NSMutableArray *clauses;
 @property (strong, nonatomic) NSMutableArray *punctuations;
-@property (strong, nonatomic, readwrite) NSString *sentence;
 
 @end
 

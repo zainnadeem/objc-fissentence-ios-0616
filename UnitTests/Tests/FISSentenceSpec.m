@@ -41,7 +41,7 @@ describe(@"FISSentence", ^{
         });
     });
     
-    describe(@"addClause:withPunctuation", ^{
+    describe(@"addClause:withPunctuation:", ^{
         it(@"should add a single word in the clause array argument and the punctuation argument to an empty sentence", ^{
             [welcome addClause:@[@"Welcome"] withPunctuation:@"!"];
             
