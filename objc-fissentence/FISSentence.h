@@ -5,6 +5,8 @@
 @interface FISSentence : NSObject
 
 @property (strong, nonatomic, readonly) NSString *sentence;
+@property (strong, nonatomic) NSMutableArray *clauses;
+@property (strong, nonatomic) NSMutableArray *punctuations;
 
 - (void)addClause:(NSArray *)clause withPunctuation:(NSString *)punctuation;
 

@@ -12,7 +12,6 @@ describe(@"FISSentence", ^{
     
     __block NSArray *invalidPuncts;
     
-    __block FISSentence *defaultSentence;
     __block FISSentence *welcome;
     __block FISSentence *heyHiHello;
     __block FISSentence *heyNonny;
@@ -21,24 +20,23 @@ describe(@"FISSentence", ^{
         
         invalidPuncts = [@"aAmMzZ13690~`@#$%^&*()[]{}|<>" componentsSeparatedByString:@""];
 
-        defaultSentence = [[FISSentence alloc] init];
         welcome = [[FISSentence alloc] init];
+        welcome.clauses = [[NSMutableArray alloc] init];
+        welcome.punctuations = [[NSMutableArray alloc] init];
         
         heyHiHello = [[FISSentence alloc] init];
+        heyHiHello.clauses = [[NSMutableArray alloc] init];
+        heyHiHello.punctuations = [[NSMutableArray alloc] init];
         [heyHiHello addClause:@[@"hey"] withPunctuation:@","];
         [heyHiHello addClause:@[@"hi"] withPunctuation:@","];
         [heyHiHello addClause:@[@"hello"] withPunctuation:@"!"];
         
         heyNonny = [[FISSentence alloc] init];
+        heyNonny.clauses = [[NSMutableArray alloc] init];
+        heyNonny.punctuations = [[NSMutableArray alloc] init];
         [heyNonny addClause:@[@"hey"] withPunctuation:@","];
         [heyNonny addClause:@[@"nonny", @"and", @"a", @"ho-ho-ho"] withPunctuation:@"."];
         
-    });
-    
-    describe(@"default initializer", ^{
-        it(@"should set the sentence property to an empty string", ^{
-            expect(defaultSentence.sentence).to.equal(@"");
-        });
     });
     
     describe(@"addClause:withPunctuation:", ^{

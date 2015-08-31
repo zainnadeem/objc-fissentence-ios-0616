@@ -5,24 +5,10 @@
 @interface FISSentence ()
 
 @property (strong, nonatomic, readwrite) NSString *sentence;
-@property (strong, nonatomic) NSMutableArray *clauses;
-@property (strong, nonatomic) NSMutableArray *punctuations;
 
 @end
 
 @implementation FISSentence
-
-- (instancetype)init {
-    self = [super init];
-    
-    if (self) {
-        _clauses = [[NSMutableArray alloc]init];
-        _punctuations = [[NSMutableArray alloc] init];
-        _sentence = @"";
-    }
-    
-    return self;
-}
 
 - (void)assembleSentence {
     NSMutableString *sentence = [[NSMutableString alloc] initWithString:@""];

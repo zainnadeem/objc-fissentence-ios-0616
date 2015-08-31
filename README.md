@@ -49,7 +49,7 @@ Well, maybe not for the Sheriff.
 
 ## Instructions
 
-Fork and clone this lab. Open the `objc-fissentence.xcworkspace` file.
+Open the `objc-fissentence.xcworkspace` file.
 
 ### I. Set Up the Custom Class Files
 
@@ -57,7 +57,13 @@ Create a custom class called `FISSentence` that inherits from `NSObject`.
 
 #### Properties
 
-In the `FISSentence.h` header file, declare a public `readonly` property that is an `NSString` called `sentence`.
+In the `FISSentence.h` header file, declare three public properties:
+
+  * a `readonly` property that is an `NSString` called `sentence`,
+  * an `NSMutableArray` called `clauses`, and
+  * an `NSMutableArray` called `punctuations`.  
+  **Top-tip:** *Notice the trailing "s" in the property names. Even though "punctuation" is its own plural form, our code needs to disambiguate the collection's name from the name of its contents. Even though this is linguistically awkward, it's regarding among programmers as best practice to use the trailing "s" character for collection names despite the linguistic inaccuracy.*
+
 
 In the `FISSentence.m` implementation file, create a private `@interface` section between the `#import` lines and the `@implementation` section with the correct syntax:
 
@@ -70,10 +76,7 @@ In the `FISSentence.m` implementation file, create a private `@interface` sectio
 Within this private `@interface`:
 
   *  redeclare the `sentence` property as `readwrite`,
-  *  declare a private `NSMutableArray` property called `clauses`, and
-  *  declare a private `NSMutableArray` property called `punctuations`.  
-  **Top-tip:** *Notice the trailing "s" in the property names. Even though "punctuation" is its own plural form, our code needs to disambiguate the collection's name from the name of its contents. Even though this is linguistically awkward, it's regarding among programmers as best practice to use the trailing "s" character for collection names despite the linguistic inaccuracy.*
-  
+ 
 #### Public Methods
 
 In the `FISSentence.h` header file, declare the eight (8) following public methods, none of which provide a return (i.e. are return-type `void`):
@@ -96,27 +99,6 @@ In the `FISSentence.h` header file, declare the eight (8) following public metho
 
 #### Private Methods
 
-##### Override `init`
-
-This lesson is not about writing initializers, however the private mutable array properties must be initialized when setting up the instance of `FISSentence`. This cannot be done from the outside of the class. Paste the following code into the `FISSentence.m`; you don't to understand it for this lab but it must be included. Keep the `init` method organized at the top of the `@implementation` section as you write out the other methods:
-
-```objc
-// paste into FISSentence.m
-
-- (instancetype)init {
-    self = [super init];
-    
-    if (self) {
-        _clauses = [[NSMutableArray alloc]init];
-        _punctuations = [[NSMutableArray alloc] init];
-        _sentence = @"";
-    }
-    
-    return self;
-}
-```
-##### Declare Private Methods
-
 Declare a private method called `assembleSentence` with return-type `void`. Leave the implementation empty for now.
 
 Declare the five (5) following private methods that will be used internally to verify the argument values passed into the public methods. All of them should be return-type `BOOL`. Write their implementations to simply `return NO;` for now:
@@ -127,17 +109,11 @@ Declare the five (5) following private methods that will be used internally to v
   * `validWordsIndex:inClauseAtIndex:` which takes two arguments, an `NSUInteger` called `wordsIndex` and an `NSUInteger` called `clausesIndex`, and
   * `validWord:` which takes one `NSString` argument called `word`.
 
-##### Define Public Method Implementations
+#### Define Public Method Implementations
 
 Below the private methods, use autocomplete to define the eight (8) public method implementations to do nothing.
 
-##### Run the Tests
-
-At this point, your lab should be set up enough to be able to run the tests. Use `⌘` `U` to see that most of them initially fail.
-
-Verify that the test called `FISSentence__default_initializer__should_set_the_sentence_property_to_an_empty_string` passes with a green icon. This test checks that the `init` method which you were given up above is working correctly.
-
-### II. Write the Private Method Implemenations
+### II. Write the Private Method Implementations
 
 In the course of writing the implementation for the public method `addClause:withPunctuation:`, you'll need to write the implementations for some of the private methods, particularly `assembleSentence`.
 
@@ -188,3 +164,9 @@ Continue writing the implementations for the other seven (7) public methods. **A
 Once all of the tests pass, celebrate with a little dance number. You deserve it!
 
 ![](https://curriculum-content.s3.amazonaws.com/ios-intro-to-objects-unit/men_in_tights_chorus_line.gif)
+
+## Advanced
+
+Did you notice, however, that the `clauses` and `punctuations` arrays that we stored the data in were public? Ideally these would be private and not even visible to the public, but since we needed to make them mutable arrays they had to be initialized in the test file (reference the `beforeEach` block in the spec file to see this).
+
+In order to initialize private properties so they can used internally by method implementations, a special method called an "initializer" can be written to set these private properties to default values. In the case of our mutable arrays, they can be initialized to empty arrays so that they're prepared to receive method calls that change their data.
