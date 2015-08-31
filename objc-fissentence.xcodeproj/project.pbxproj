@@ -10,7 +10,6 @@
 		26597E196C8FD1EFCC3542D3 /* LaunchScreen.xib in Sources */ = {isa = PBXBuildFile; fileRef = F6FAF44C9ADBD46B1607187F /* LaunchScreen.xib */; };
 		2840B5F1BD3D2BF1903BF269 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F52E15CCACDD19D3F6BA2DD7 /* Foundation.framework */; };
 		29070F8F14621F57C7633941 /* libPods-unit_tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0988762905FC7087BA692328 /* libPods-unit_tests.a */; };
-		4D8D86131B8FA09E00A212DF /* FISSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D86121B8FA09E00A212DF /* FISSentence.m */; };
 		4D8D86161B909A3200A212DF /* FISSentenceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D86141B90999000A212DF /* FISSentenceSpec.m */; };
 		4DBA1C872FBD2F74327A9322 /* Main.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 0DC71991C1721B5F6D46A7D1 /* Main.storyboard */; };
 		5FDA21ED38E240D4C7579DE3 /* FISAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 559E3338F3745BA4CFAD84BA /* FISAppDelegate.m */; };
@@ -36,8 +35,6 @@
 		212DBAE49445BF4A2D751301 /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		325CD6F0314B85CB8C0CD078 /* objc-fissentence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "objc-fissentence.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B04B7B4B7A470CE491CDF51 /* UnitTests-Prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UnitTests-Prefix.pch"; sourceTree = "<group>"; };
-		4D8D86111B8FA09E00A212DF /* FISSentence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISSentence.h; sourceTree = "<group>"; };
-		4D8D86121B8FA09E00A212DF /* FISSentence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISSentence.m; sourceTree = "<group>"; };
 		4D8D86141B90999000A212DF /* FISSentenceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISSentenceSpec.m; sourceTree = "<group>"; };
 		52EDE9BBDC2BE42D695E8695 /* objc-fissentence-Prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "objc-fissentence-Prefix.pch"; sourceTree = "<group>"; };
 		559E3338F3745BA4CFAD84BA /* FISAppDelegate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = FISAppDelegate.m; sourceTree = "<group>"; };
@@ -102,8 +99,6 @@
 			children = (
 				9747AFC1CEFF3C81F5C70287 /* FISAppDelegate.h */,
 				559E3338F3745BA4CFAD84BA /* FISAppDelegate.m */,
-				4D8D86111B8FA09E00A212DF /* FISSentence.h */,
-				4D8D86121B8FA09E00A212DF /* FISSentence.m */,
 				0DC71991C1721B5F6D46A7D1 /* Main.storyboard */,
 				8222666202D6947F77ECE0A6 /* Resources */,
 			);
@@ -312,7 +307,6 @@
 			files = (
 				5FDA21ED38E240D4C7579DE3 /* FISAppDelegate.m in Sources */,
 				4DBA1C872FBD2F74327A9322 /* Main.storyboard in Sources */,
-				4D8D86131B8FA09E00A212DF /* FISSentence.m in Sources */,
 				26597E196C8FD1EFCC3542D3 /* LaunchScreen.xib in Sources */,
 				C2976F0EE5E5EEC67B92473E /* main.m in Sources */,
 			);
