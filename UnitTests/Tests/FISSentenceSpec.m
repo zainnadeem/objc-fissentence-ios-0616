@@ -13,247 +13,242 @@ describe(@"FISSentence", ^{
     __block NSArray *invalidPuncts;
     
     __block FISSentence *welcome;
-    __block FISSentence *heyHiHello;
-    __block FISSentence *heyNonny;
+    __block FISSentence *heyBlinkin;
+    __block FISSentence *kingIllegal;
+    __block FISSentence *deeredToKill;
     
     beforeEach(^{
+        
+        // Hey Blinkin!
+        // King illegal forest to pig kill in it a is.
+        // He deered to kill a king's dare.
         
         invalidPuncts = [@"aAmMzZ13690~`@#$%^&*()[]{}|<>" componentsSeparatedByString:@""];
 
         welcome = [[FISSentence alloc] init];
-        welcome.clauses = [[NSMutableArray alloc] init];
-        welcome.punctuations = [[NSMutableArray alloc] init];
+        welcome.words = [[NSMutableArray alloc] init];
+        welcome.punctuation = @"";
         
-        heyHiHello = [[FISSentence alloc] init];
-        heyHiHello.clauses = [[NSMutableArray alloc] init];
-        heyHiHello.punctuations = [[NSMutableArray alloc] init];
-        [heyHiHello addClause:@[@"hey"] withPunctuation:@","];
-        [heyHiHello addClause:@[@"hi"] withPunctuation:@","];
-        [heyHiHello addClause:@[@"hello"] withPunctuation:@"!"];
+        heyBlinkin = [[FISSentence alloc] init];
+        heyBlinkin.words = [[NSMutableArray alloc] initWithObjects:@"Hey", nil];
+        heyBlinkin.punctuation = @"!";
         
-        heyNonny = [[FISSentence alloc] init];
-        heyNonny.clauses = [[NSMutableArray alloc] init];
-        heyNonny.punctuations = [[NSMutableArray alloc] init];
-        [heyNonny addClause:@[@"hey"] withPunctuation:@","];
-        [heyNonny addClause:@[@"nonny", @"and", @"a", @"ho-ho-ho"] withPunctuation:@"."];
+        kingIllegal = [[FISSentence alloc] init];
+        kingIllegal.words = [[NSMutableArray alloc] initWithObjects:@"King", @"illegal", @"forest", @"to", @"pig", @"kill", @"in", @"it", @"a", @"is", nil];
+        kingIllegal.punctuation = @".";
         
+        deeredToKill = [[FISSentence alloc] init];
+        deeredToKill.words = [[NSMutableArray alloc] init];
+        deeredToKill.punctuation = @"";
     });
     
-    describe(@"addClause:withPunctuation:", ^{
-        it(@"should add a single word in the clause array argument and the punctuation argument to an empty sentence", ^{
-            [welcome addClause:@[@"Welcome"] withPunctuation:@"!"];
+    describe(@"addWord:", ^{
+        it(@"should add the word argument to an empty sentence", ^{
+            [welcome addWord:@"Welcome"];
             
-            expect(welcome.sentence).to.equal(@"Welcome!");
+            expect(welcome.sentence).to.equal(@"Welcome");
         });
         
-        it(@"should capitalize the first word of the sentence", ^{
-            [welcome addClause:@[@"welcome"] withPunctuation:@"!"];
+        it(@"should add the word argument between the last word in the sentence and the punctuation mark", ^{
+            [heyBlinkin addWord:@"Blinkin"];
             
-            expect(welcome.sentence).to.equal(@"Welcome!");
+            expect(heyBlinkin.sentence).to.equal(@"Hey Blinkin!");
         });
         
-        it(@"should add the words in the clause array argument and the punctuation argument to an empty sentence", ^{
-            [welcome addClause:@[@"Welcome", @"to", @"the", @"Flatiron", @"School"] withPunctuation:@"!"];
+        it(@"should do nothing when the word argument is nil", ^{
+            [heyBlinkin addWord:nil];
             
-            NSString *welcomeString = @"Welcome to the Flatiron School!";
-            expect(welcome.sentence).to.equal(welcomeString);
+            expect(heyBlinkin.sentence).to.equal(@"Hey!");
         });
         
-        it(@"should add the words in the clause array argument and the punctuation argument to an existing sentence with a space between the clauses", ^{
-            [welcome addClause:@[@"Hello"] withPunctuation:@","];
-            [welcome addClause:@[@"welcome", @"to", @"the", @"Flatiron", @"School"] withPunctuation:@"!"];
+        it(@"should do nothing when the word argument is an empty string", ^{
+            [heyBlinkin addWord:@""];
             
-            NSString *helloWelcome = @"Hello, welcome to the Flatiron School!";
-            expect(welcome.sentence).to.equal(helloWelcome);
+            expect(heyBlinkin.sentence).to.equal(@"Hey!");
         });
-        
-        it(@"should not accept an empty array or nil as the clause argument", ^{
-            [welcome addClause:@[] withPunctuation:@"!"];
-            [welcome addClause:nil withPunctuation:@"."];
+
+        it(@"should do nothing when the word argument is a single space", ^{
+            [heyBlinkin addWord:@" "];
             
-            expect(welcome.sentence).to.equal(@"");
-        });
-        
-        it(@"should not accept an empty string or nil as the punctuation argument", ^{
-            [welcome addClause:@[@"Welcome"] withPunctuation:@""];
-            [welcome addClause:@[@"Welcome"] withPunctuation:nil];
-            
-            expect(welcome.sentence).to.equal(@"");
-        });
-        
-        it(@"should not accept non-punctuation characters as the punctuation argument", ^{
-            for (NSString *badPunct in invalidPuncts) {
-                [welcome addClause:@[@"Welcome"] withPunctuation:badPunct];
-            }
-            
-            expect(welcome.sentence).to.equal(@"");
-        });
-    });
-    
-    describe(@"removeClauseAtIndex:", ^{
-        it(@"should remove the first clause and its punctuation when the argument integer is 0", ^{
-            [heyHiHello removeClauseAtIndex:0];
-            
-            expect(heyHiHello.sentence).to.equal(@"Hi, hello!");
-        });
-        
-        it(@"should remove the second clause and its punctuation when the argument integer is 1", ^{
-            [heyHiHello removeClauseAtIndex:1];
-            
-            expect(heyHiHello.sentence).to.equal(@"Hey, hello!");
-        });
-        
-        it(@"should do nothing if the argument integer exceeds the bounds of the clause array", ^{
-            [heyHiHello removeClauseAtIndex:3];
-            
-            expect(heyHiHello.sentence).to.equal(@"Hey, hi, hello!");
-        });
-    });
-    
-    describe(@"insertClause:withPunctuation:atClausesIndex:", ^{
-        it(@"should add the clause and its punctuation to the beginning of the sentence when the clausesIndex argument is 0", ^{
-            [heyNonny insertClause:@[@"hey", @"nonny"] withPunctuation:@"," atClausesIndex:0];
-            
-            NSString *nonnyString = @"Hey nonny, hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-        
-        it(@"should add the clause and its punctuation to to the middle of the sentence when the clausesIndex argument is 1", ^{
-            [heyNonny insertClause:@[@"nonny"] withPunctuation:@"," atClausesIndex:1];
-            
-            NSString *nonnyString = @"Hey, nonny, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-        
-        it(@"should not add the clause and its punctuation when the clausesIndex argument is beyond bounds of the clauses array", ^{
-            [heyNonny insertClause:@[@"nonny"] withPunctuation:@"," atClausesIndex:2];
-            
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-    });
-    
-    describe(@"replacePunctuationForClauseAtIndex:withPunctuation:", ^{
-        it(@"should replace the string in the punctuations array at the argument index with the argument string", ^{
-            [heyHiHello replacePunctuationForClauseAtIndex:0 withPunctuation:@";"];
-            
-            expect(heyHiHello.sentence).to.equal(@"Hey; hi, hello!");
-        });
-        
-        it(@"should not replace the string in the punctuations array when the argument string is not a punctuation character", ^{
-            for (NSString *badPunct in invalidPuncts) {
-                [heyHiHello replacePunctuationForClauseAtIndex:0 withPunctuation:badPunct];
-            }
-            
-            expect(heyHiHello.sentence).to.equal(@"Hey, hi, hello!");
-        });
-        
-        it(@"should do nothing when the index argument is beyond bounds of the punctuation array", ^{
-            [heyHiHello replacePunctuationForClauseAtIndex:3 withPunctuation:@"!"];
-            
-            expect(heyHiHello.sentence).to.equal(@"Hey, hi, hello!");
-        });
-    });
-    
-    describe(@"addWord:toClauseAtIndex:", ^{
-        it(@"should add the word argument to the end of the clause sub-array at the clausesIndex argument", ^{
-            [heyNonny addWord:@"nonny" toClauseAtIndex:0];
-            
-            NSString *nonnyString = @"Hey nonny, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-        
-        it(@"should do nothing when the clausesIndex argument is out of bounds of the clauses array", ^{
-            [heyNonny addWord:@"nonny" toClauseAtIndex:2];
-            
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-    });
-    
-    describe(@"removeWordAtIndex:fromClauseAtIndex:", ^{
-        it(@"should remove the second word from the second clause in the clauses array", ^{
-            [heyNonny removeWordAtIndex:1 fromClauseAtIndex:1];
-            
-            NSString *nonnyString = @"Hey, nonny a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-        
-        it(@"should do nothing when the wordsIndex is beyond bounds of the clause at the clausesIndex", ^{
-            [heyNonny removeWordAtIndex:1 fromClauseAtIndex:0];
-            
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-        
-        it(@"should do nothing when the clausesIndex is beyond bounds of the clauses array", ^{
-            [heyNonny removeWordAtIndex:1 fromClauseAtIndex:2];
-            
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-    });
-    
-    describe(@"insertWord:atIndex:inClauseAtIndex:", ^{
-        it(@"should add the word argument to second index in the second clause in the clauses array", ^{
-            [heyNonny insertWord:@"nonny" atIndex:1 inClauseAtIndex:1];
-            
-            NSString *nonnyString = @"Hey, nonny nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-        
-        it(@"should do nothing if the word argument is an empty string or nil", ^{
-            [heyNonny insertWord:@"" atIndex:1 inClauseAtIndex:1];
-            [heyNonny insertWord:nil atIndex:1 inClauseAtIndex:1];
-            
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-        
-        it(@"should do nothing if the clausesIndex argument is out of bounds of the clauses array", ^{
-            [heyNonny insertWord:@"nonny" atIndex:1 inClauseAtIndex:2];
-            
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
-        });
-        
-        it(@"should do nothing if the wordsIndex argument is out of bounds for the sub-array at the clausesIndex argument of the clauses array", ^{
-            [heyNonny insertWord:@"nonny" atIndex:1 inClauseAtIndex:0];
-            
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
+            expect(heyBlinkin.sentence).to.equal(@"Hey!");
         });
     });
 
-    describe(@"replaceWordAtIndex:inClauseAtIndex:withWord:", ^{
-        it(@"should replace the fourth word in the second clause with word argument", ^{
-            [heyNonny replaceWordAtIndex:3 inClauseAtIndex:1 withWord:@"woah-woah-woah"];
+    describe(@"addWords:WithPunctuation", ^{
+        it(@"should add a single word and punctuation mark to an empty sentence", ^{
+            [welcome addWords:@[@"Welcome"] withPunctuation:@"!"];
             
-            NSString *nonnyString = @"Hey, nonny and a woah-woah-woah.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
+            expect(welcome.sentence).to.equal(@"Welcome!");
         });
         
-        it(@"should do nothing if the wordsIndex argument is beyond bounds of the sub-array at the clausesIndex in the clauses array", ^{
-            [heyNonny replaceWordAtIndex:4 inClauseAtIndex:1 withWord:@"woah-woah-woah"];
+        it(@"should add a single word to an existing sentence", ^{
+            [heyBlinkin addWords:@[@"Blinkin"] withPunctuation:@"!"];
             
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
+            expect(heyBlinkin.sentence).to.equal(@"Hey Blinkin!");
         });
         
-        it(@"should do nothing if the clausesIndex argument is beyond bounds of the clauses array", ^{
-            [heyNonny replaceWordAtIndex:3 inClauseAtIndex:2 withWord:@"woah-woah-woah"];
+        it(@"should should overwrite the punctuation of an existing sentence", ^{
+            [heyBlinkin addWords:@[@"Blinkin"] withPunctuation:@"?"];
             
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
+            expect(heyBlinkin.sentence).to.equal(@"Hey Blinkin?");
+        });
+
+        
+        it(@"should add the words in the array argument to an empty sentence", ^{
+            deeredToKill.punctuation = @".";
+            [deeredToKill addWords:@[@"He", @"deered", @"to", @"kill", @"a", @"king's", @"dare"] withPunctuation:@"."];
+            
+            NSString *expectedSentence = @"He deered to kill a king's dare.";
+            expect(deeredToKill.sentence).to.equal(expectedSentence);
         });
         
-        it(@"should do nothing if the word argument is an empty string or nil", ^{
-            [heyNonny replaceWordAtIndex:3 inClauseAtIndex:1 withWord:@""];
-            [heyNonny replaceWordAtIndex:3 inClauseAtIndex:1 withWord:nil];
+        it(@"should not add empty strings or spaces to the self.words array", ^{
+            [heyBlinkin addWords:@[@"", @" ", @"Blinkin"] withPunctuation:@"!"];
             
-            NSString *nonnyString = @"Hey, nonny and a ho-ho-ho.";
-            expect(heyNonny.sentence).to.equal(nonnyString);
+            expect(heyBlinkin.words.count).to.equal(2);
         });
+        
+        it(@"should do nothing if the words argument is an empty array", ^{
+            [heyBlinkin addWord:@"Blinkin"];
+            [heyBlinkin addWords:@[] withPunctuation:@"?"];
+            
+            expect(heyBlinkin.sentence).to.equal(@"Hey Blinkin!");
+        });
+        
+        it(@"should do nothing if the words argument is nil", ^{
+            [heyBlinkin addWord:@"Blinkin"];
+            [heyBlinkin addWords:nil withPunctuation:@"?"];
+            
+            expect(heyBlinkin.sentence).to.equal(@"Hey Blinkin!");
+        });
+
+        
+        it(@"should do nothing if the punctuation argument is an empty string", ^{
+            [heyBlinkin addWord:@"Blinkin"];
+            [heyBlinkin addWords:@[@"watch", @"out"] withPunctuation:@""];
+            
+            expect(heyBlinkin.sentence).to.equal(@"Hey Blinkin!");
+        });
+        
+        it(@"should do nothing if the punctuation argument is nil", ^{
+            [heyBlinkin addWord:@"Blinkin"];
+            [heyBlinkin addWords:@[@"watch", @"out"] withPunctuation:nil];
+            
+            expect(heyBlinkin.sentence).to.equal(@"Hey Blinkin!");
+        });
+
+        
+        it(@"should do nothing if the punctuation argument is a non-punctuation character", ^{
+            [heyBlinkin addWord:@"Blinkin"];
+            for (NSString *badPunct in invalidPuncts) {
+                [heyBlinkin addWords:@[@"watch", @"out"] withPunctuation:badPunct];
+            }
+            
+            expect(heyBlinkin.sentence).to.equal(@"Hey Blinkin!");
+        });
+    });
+    
+    describe(@"removeWordAtIndex:", ^{
+        it(@"should remove the first word when the argument integer is 0", ^{
+            [kingIllegal removeWordAtIndex:0];
+            
+            NSString *expectedSentence = @"illegal forest to pig kill in it a is.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+        
+        it(@"should remove the second word when the argument integer is 1", ^{
+            [kingIllegal removeWordAtIndex:1];
+            
+            NSString *expectedSentence = @"King forest to pig kill in it a is.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+        
+        it(@"should do nothing if the argument integer exceeds the bounds of the words array", ^{
+            [kingIllegal removeWordAtIndex:10];
+            
+            expect(kingIllegal.words.count).to.equal(10);
+        });
+    });
+
+    describe(@"insertWord:atIndex:", ^{
+        it(@"should add the word argument to the beginning of the sentence when the index argument is 0", ^{
+            [kingIllegal insertWord:@"It" atIndex:0];
+            
+            NSString *expectedSentence = @"It King illegal forest to pig kill in it a is.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+        
+        it(@"should add the word argument to to the middle of the sentence when the index argument is 3", ^{
+            [kingIllegal insertWord:@"thieves" atIndex:3];
+            
+            NSString *expectedSentence = @"King illegal forest thieves to pig kill in it a is.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+        
+        it(@"should not add the word argument to the sentence when the index argument is beyond bounds of the words array", ^{
+            [kingIllegal insertWord:@"jentacular" atIndex:10];
+            
+            NSString *expectedSentence = @"King illegal forest to pig kill in it a is.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+    });
+
+    describe(@"replacePunctuationWithPunctuation:", ^{
+        it(@"should replace punctuation string with the argument string", ^{
+            [heyBlinkin replacePunctuationWithPunctuation:@"?"];
+            
+            expect(heyBlinkin.sentence).to.equal(@"Hey?");
+        });
+        
+        it(@"should not replace the punctuation string when the argument string is not a punctuation character", ^{
+            for (NSString *badPunct in invalidPuncts) {
+                [heyBlinkin replacePunctuationWithPunctuation:badPunct];
+            }
+            
+            expect(heyBlinkin.sentence).to.equal(@"Hey!");
+        });
+    });
+
+    describe(@"replaceWordAtIndex:withWord:", ^{
+        it(@"should replace the fourth word in the sentence with the word argument when the index argument is 3", ^{
+            [kingIllegal replaceWordAtIndex:3 withWord:@"any"];
+            
+            NSString *expectedSentence = @"King illegal forest any pig kill in it a is.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+        
+        it(@"should do nothing if the index argument is beyond bounds of the words array", ^{
+            [kingIllegal addWord:@"definitely"];
+            [kingIllegal replaceWordAtIndex:11 withWord:@"woah-woah-woah"];
+            
+            NSString *expectedSentence = @"King illegal forest to pig kill in it a is definitely.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+        
+        it(@"should do nothing if the word argument is an empty string", ^{
+            [kingIllegal addWord:@"definitely"];
+            [kingIllegal replaceWordAtIndex:0 withWord:@""];
+            
+            NSString *expectedSentence = @"King illegal forest to pig kill in it a is definitely.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+        
+        it(@"should do nothing if the word argument is nil", ^{
+            [kingIllegal addWord:@"definitely"];
+            [kingIllegal replaceWordAtIndex:0 withWord:nil];
+            
+            NSString *expectedSentence = @"King illegal forest to pig kill in it a is definitely.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+
+        it(@"should do nothing if the word argument is a space", ^{
+            [kingIllegal addWord:@"definitely"];
+            [kingIllegal replaceWordAtIndex:0 withWord:@" "];
+            
+            NSString *expectedSentence = @"King illegal forest to pig kill in it a is definitely.";
+            expect(kingIllegal.sentence).to.equal(expectedSentence);
+        });
+
     });
 });
 
