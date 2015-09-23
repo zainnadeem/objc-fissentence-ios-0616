@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs'
 
-platform :ios, '8.4'
+platform :ios, '8.0'
 
 # Add Application pods here
 
