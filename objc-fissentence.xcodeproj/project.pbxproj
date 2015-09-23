@@ -12,7 +12,7 @@
 		29070F8F14621F57C7633941 /* libPods-unit_tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0988762905FC7087BA692328 /* libPods-unit_tests.a */; };
 		4D8D86131B8FA09E00A212DF /* FISSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D86121B8FA09E00A212DF /* FISSentence.m */; };
 		4D8D86161B909A3200A212DF /* FISSentenceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D86141B90999000A212DF /* FISSentenceSpec.m */; };
-		4DBA1C872FBD2F74327A9322 /* Main.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 0DC71991C1721B5F6D46A7D1 /* Main.storyboard */; };
+		4DBA1C872FBD2F74327A9322 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC71991C1721B5F6D46A7D1 /* Main.storyboard */; };
 		5FDA21ED38E240D4C7579DE3 /* FISAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 559E3338F3745BA4CFAD84BA /* FISAppDelegate.m */; };
 		B87712233074C11A72E8D08D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 212DBAE49445BF4A2D751301 /* Images.xcassets */; };
 		C2976F0EE5E5EEC67B92473E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A8291CA512245B71945FD /* main.m */; };
@@ -225,7 +225,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FIS;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "The Flatiron School";
 			};
 			buildConfigurationList = 1D470DB71102B809C6E8350E /* Build configuration list for PBXProject "objc-fissentence" */;
@@ -252,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B87712233074C11A72E8D08D /* Images.xcassets in Resources */,
+				4DBA1C872FBD2F74327A9322 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +342,7 @@
 				);
 				GCC_PREFIX_HEADER = "UnitTests/Resources/UnitTests-Prefix.pch";
 				INFOPLIST_FILE = "UnitTests/Resources/UnitTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -361,6 +363,7 @@
 				);
 				GCC_PREFIX_HEADER = "UnitTests/Resources/UnitTests-Prefix.pch";
 				INFOPLIST_FILE = "UnitTests/Resources/UnitTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -387,6 +390,7 @@
 				INFOPLIST_FILE = "objc-fissentence/Resources/Other-Sources/objc-fissentence-Info.plist";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -463,6 +467,7 @@
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -514,6 +519,7 @@
 					"-DNS_BLOCK_ASSERTIONS=1",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flatironschool.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
