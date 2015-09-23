@@ -10,8 +10,9 @@
 		26597E196C8FD1EFCC3542D3 /* LaunchScreen.xib in Sources */ = {isa = PBXBuildFile; fileRef = F6FAF44C9ADBD46B1607187F /* LaunchScreen.xib */; };
 		2840B5F1BD3D2BF1903BF269 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F52E15CCACDD19D3F6BA2DD7 /* Foundation.framework */; };
 		29070F8F14621F57C7633941 /* libPods-unit_tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0988762905FC7087BA692328 /* libPods-unit_tests.a */; };
+		4D83B3281BB3392C00A36DC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC71991C1721B5F6D46A7D1 /* Main.storyboard */; };
+		4D8D86131B8FA09E00A212DF /* FISSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D86121B8FA09E00A212DF /* FISSentence.m */; };
 		4D8D86161B909A3200A212DF /* FISSentenceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D86141B90999000A212DF /* FISSentenceSpec.m */; };
-		4DBA1C872FBD2F74327A9322 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC71991C1721B5F6D46A7D1 /* Main.storyboard */; };
 		5FDA21ED38E240D4C7579DE3 /* FISAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 559E3338F3745BA4CFAD84BA /* FISAppDelegate.m */; };
 		B87712233074C11A72E8D08D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 212DBAE49445BF4A2D751301 /* Images.xcassets */; };
 		C2976F0EE5E5EEC67B92473E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A8291CA512245B71945FD /* main.m */; };
@@ -247,7 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B87712233074C11A72E8D08D /* Images.xcassets in Resources */,
-				4DBA1C872FBD2F74327A9322 /* Main.storyboard in Resources */,
+				4D83B3281BB3392C00A36DC8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FDA21ED38E240D4C7579DE3 /* FISAppDelegate.m in Sources */,
+				4D8D86131B8FA09E00A212DF /* FISSentence.m in Sources */,
 				26597E196C8FD1EFCC3542D3 /* LaunchScreen.xib in Sources */,
 				C2976F0EE5E5EEC67B92473E /* main.m in Sources */,
 			);
