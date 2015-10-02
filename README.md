@@ -102,7 +102,7 @@ In the course of writing the implementation for the public method `addWord:`, yo
 2. The `assembleSentence` method should read the `words` property array and the `punctuation` property string and assemble their contents into a properly formatted sentence (i.e., spaces between each of the words with the `punctuation` string at the end). Save the assembled string to the `readonly` string property called `sentence`.  
 **Hint:** *Use the* `componentsJoinedByString:` *method to concatenate all of the individual "word" strings to the body of the sentence.*
 
-3. Now, add logic to the `addWord:` method that validates that the `word` argument string meets certain expectations: it cannot be `nil`, and empty string (`@""`), or a string with only a space in it (`@" "`). Get all of the tests for this method to pass.
+3. Now, add logic to the `addWord:` method that validates that the `word` argument string meets certain expectations: it cannot be `nil`, an empty string (`@""`), or a string with only a space in it (`@" "`). **Make sure that the `assembleSentence` method still gets called every time** (i.e. don't wrap the protections around the call of `assembleSentence`; instead, protect changing the data that `assembleSentence` relies upon). Get all of the tests for this method to pass.
 
 4. Finally, move the validation logic for this check into the private `validWord:` methods. Refactor the `addWord:` method to call this validation method instead of doing the check itself. This will allow other methods to use the same uniform validation logic without having to copy/paste the code. Verify that `addWord:` still passes all of its tests before moving on.
 
@@ -127,7 +127,7 @@ Continue writing the implementations for the other five (5) public methods. **Al
 
 3. The `insertWord:atIndex:` method should insert the submitted `word` string argument into the `words` property array at the position specified bye the `index` argument. Use the private validation methods `validWord:` and `validIndex:` to perform checks on the method arguments. The `insertWord:atIndex:` method should only attempt to change the properties if both arguments pass validation.
 
-4. The `replacePunctuation:withPunctuation:` method should overwrite the string in the `punctuation` property string with the new `punctuation` argument string. This method should only attempt to make the change if both of the new `punctuation` argument string passes validation.
+4. The `replacePunctuationWithPunctuation:` method should overwrite the string in the `punctuation` property string with the new `punctuation` argument string. This method should only attempt to make the change if the new `punctuation` argument string passes validation.
 
 10. The `replaceWordAtIndex:withWord:` method should overwrite the string in the `words` property array at the position specified by the `index` argument with the new `word` argument string. This method should not attempt to make an overwrite unless the `word` argument passes the `validWord:` check and the `index` argument passes the `validIndex:` argument.
 
@@ -139,4 +139,4 @@ Now give yourself a high five; you deserve it!
 
 Did you notice, that the `words` and `punctuation` properties that we stored the data in were public? Ideally these would be private and not even visible to the public, but since we needed to give them starting values in order to run the tests, we needed to make them public so the test file could set the initial values.
 
-In order to initialize private properties so they can used internally by method implementations, a special method called an "initializer" can be written to set private properties to default values without giving access to an outside class. In the case of our `words` mutable array, it could be initialized to and empty mutable array so that it's prepared to receive method calls that changes its data.
+In order to initialize private properties so they can be used internally by method implementations, a special method called an "initializer" can be written to set private properties to default values without giving access to an outside class. In the case of our `words` mutable array, it could be initialized to and empty mutable array so that it's prepared to receive method calls that changes its data.
