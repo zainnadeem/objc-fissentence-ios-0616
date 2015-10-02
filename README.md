@@ -102,7 +102,7 @@ In the course of writing the implementation for the public method `addWord:`, yo
 2. The `assembleSentence` method should read the `words` property array and the `punctuation` property string and assemble their contents into a properly formatted sentence (i.e., spaces between each of the words with the `punctuation` string at the end). Save the assembled string to the `readonly` string property called `sentence`.  
 **Hint:** *Use the* `componentsJoinedByString:` *method to concatenate all of the individual "word" strings to the body of the sentence.*
 
-3. Now, add logic to the `addWord:` method that validates that the `word` argument string meets certain expectations: it cannot be `nil`, an empty string (`@""`), or a string with only a space in it (`@" "`). Get all of the tests for this method to pass.
+3. Now, add logic to the `addWord:` method that validates that the `word` argument string meets certain expectations: it cannot be `nil`, an empty string (`@""`), or a string with only a space in it (`@" "`). **Make sure that the `assembleSentence` method still gets called every time** (i.e. don't wrap the protections around the call of `assembleSentence`; instead, protect changing the data that `assembleSentence` relies upon). Get all of the tests for this method to pass.
 
 4. Finally, move the validation logic for this check into the private `validWord:` methods. Refactor the `addWord:` method to call this validation method instead of doing the check itself. This will allow other methods to use the same uniform validation logic without having to copy/paste the code. Verify that `addWord:` still passes all of its tests before moving on.
 
