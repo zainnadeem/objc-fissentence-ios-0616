@@ -127,7 +127,7 @@ Continue writing the implementations for the other five (5) public methods. **Al
 
 3. The `insertWord:atIndex:` method should insert the submitted `word` string argument into the `words` property array at the position specified bye the `index` argument. Use the private validation methods `validWord:` and `validIndex:` to perform checks on the method arguments. The `insertWord:atIndex:` method should only attempt to change the properties if both arguments pass validation.
 
-4. The `replacePunctuation:withPunctuation:` method should overwrite the string in the `punctuation` property string with the new `punctuation` argument string. This method should only attempt to make the change if both of the new `punctuation` argument string passes validation.
+4. The `replacePunctuationWithPunctuation:` method should overwrite the string in the `punctuation` property string with the new `punctuation` argument string. This method should only attempt to make the change if the new `punctuation` argument string passes validation.
 
 10. The `replaceWordAtIndex:withWord:` method should overwrite the string in the `words` property array at the position specified by the `index` argument with the new `word` argument string. This method should not attempt to make an overwrite unless the `word` argument passes the `validWord:` check and the `index` argument passes the `validIndex:` argument.
 
