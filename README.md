@@ -114,7 +114,9 @@ Continue writing the implementations for the other five (5) public methods. **Al
 	* Add checks that the `words` argument array is neither `nil` nor an `empty` array. If it is, then the method should do nothing.  
 **Hint:** *Use a* `return;` *statement to escape the method implementation if either case is true.*
 
-  * Write validation logic that checks that the `punctuation` argument string is one of these seven (7) characters: `.?!,;:—` (period, question mark, exclamation point, comma, semicolon, colon, and long-dash). If the `punctuation` argument is invalid, then this method should do nothing.  
+  * Write validation logic that checks that the `punctuation` argument string is one of these seven (7) characters: `.?!,;:—` (period, question mark, exclamation point, comma, semicolon, colon, and long-dash).  
+  **Hint:** *It's not in the reference documentation, but* `NSString` *has a* `containsString:` *method that may be useful.*  
+  If the `punctuation` argument is invalid, then this method should do nothing.  
 **Hint:** *Use another* `return;` *statement to escape the method implementation if the check fails.*
 
   * Use the `validWord:` method inside a loop to avoid adding any strings to the `words` property array that are empty string or spaces. At this point, all of the tests for this method should pass.
