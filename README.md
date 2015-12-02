@@ -142,3 +142,4 @@ Now give yourself a high five; you deserve it!
 Did you notice, that the `words` and `punctuation` properties that we stored the data in were public? Ideally these would be private and not even visible to the public, but since we needed to give them starting values in order to run the tests, we needed to make them public so the test file could set the initial values.
 
 In order to initialize private properties so they can be used internally by method implementations, a special method called an "initializer" can be written to set private properties to default values without giving access to an outside class. In the case of our `words` mutable array, it could be initialized to and empty mutable array so that it's prepared to receive method calls that changes its data.
+<a href='https://learn.co/lessons/objc-fissentence' data-visibility='hidden'>View this lesson on Learn.co</a>
