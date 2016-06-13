@@ -11,10 +11,11 @@
 		2840B5F1BD3D2BF1903BF269 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F52E15CCACDD19D3F6BA2DD7 /* Foundation.framework */; };
 		29070F8F14621F57C7633941 /* libPods-unit_tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0988762905FC7087BA692328 /* libPods-unit_tests.a */; };
 		4D83B3281BB3392C00A36DC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC71991C1721B5F6D46A7D1 /* Main.storyboard */; };
-		4D8D86131B8FA09E00A212DF /* FISSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D86121B8FA09E00A212DF /* FISSentence.m */; };
+		4D8D86131B8FA09E00A212DF /* (null) in Sources */ = {isa = PBXBuildFile; };
 		4D8D86161B909A3200A212DF /* FISSentenceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D86141B90999000A212DF /* FISSentenceSpec.m */; };
 		5FDA21ED38E240D4C7579DE3 /* FISAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 559E3338F3745BA4CFAD84BA /* FISAppDelegate.m */; };
 		B87712233074C11A72E8D08D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 212DBAE49445BF4A2D751301 /* Images.xcassets */; };
+		BFBFD9B11D09FF5900EBFFFD /* FISSentence.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBFD9B01D09FF5900EBFFFD /* FISSentence.m */; };
 		C2976F0EE5E5EEC67B92473E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A8291CA512245B71945FD /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,8 @@
 		5F99908687436A885FE16FAD /* objc-fissentence-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "objc-fissentence-Info.plist"; sourceTree = "<group>"; };
 		74A3D3C37CB8B751866B7566 /* Pods-unit_tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unit_tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9747AFC1CEFF3C81F5C70287 /* FISAppDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = FISAppDelegate.h; sourceTree = "<group>"; };
+		BFBFD9AF1D09FF5900EBFFFD /* FISSentence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISSentence.h; sourceTree = "<group>"; };
+		BFBFD9B01D09FF5900EBFFFD /* FISSentence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISSentence.m; sourceTree = "<group>"; };
 		C046E3F301D53E2B5884BF5A /* objc-fissentenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "objc-fissentenceTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F1A8F792A9A827C27B8660 /* Pods-unit_tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unit_tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-unit_tests/Pods-unit_tests.release.xcconfig"; sourceTree = "<group>"; };
 		F52E15CCACDD19D3F6BA2DD7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -100,6 +103,8 @@
 			children = (
 				9747AFC1CEFF3C81F5C70287 /* FISAppDelegate.h */,
 				559E3338F3745BA4CFAD84BA /* FISAppDelegate.m */,
+				BFBFD9AF1D09FF5900EBFFFD /* FISSentence.h */,
+				BFBFD9B01D09FF5900EBFFFD /* FISSentence.m */,
 				0DC71991C1721B5F6D46A7D1 /* Main.storyboard */,
 				8222666202D6947F77ECE0A6 /* Resources */,
 			);
@@ -308,7 +313,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FDA21ED38E240D4C7579DE3 /* FISAppDelegate.m in Sources */,
-				4D8D86131B8FA09E00A212DF /* FISSentence.m in Sources */,
+				4D8D86131B8FA09E00A212DF /* (null) in Sources */,
+				BFBFD9B11D09FF5900EBFFFD /* FISSentence.m in Sources */,
 				26597E196C8FD1EFCC3542D3 /* LaunchScreen.xib in Sources */,
 				C2976F0EE5E5EEC67B92473E /* main.m in Sources */,
 			);
